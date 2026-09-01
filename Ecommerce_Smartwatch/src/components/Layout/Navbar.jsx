@@ -2,318 +2,167 @@
 import { useState } from "react";
 import { Search, User, ShoppingBag, Menu, X } from "lucide-react";
 
-const COLORS = {
-  ink: "#14181A",
-  ivory: "#F7F3EB",
-  brass: "#A9803F",
-  brassDark: "#7C5D2C",
-  hairline: "#DCD5C5",
-  muted: "#7C7A72",
-};
-
 const NAV_LINKS = ["New arrivals", "Men", "Women", "Collection"];
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [query, setQuery] = useState("");
+
   const cartCount = 2;
 
   return (
-    <div style={{ fontFamily: "Inter, sans-serif", background: COLORS.ivory }}>
-      <style>{`
-        @keyframes bezel-sweep {
-          to { transform: translate(-50%, -100%) rotate(360deg); }
-        }
-        .bezel-hand {
-          animation: bezel-sweep 8s steps(8) infinite;
-        }
-        .bezel-link {
-          border-bottom: 1px solid transparent;
-          transition: border-color 0.15s ease;
-        }
-        .bezel-link:hover {
-          border-bottom-color: ${COLORS.brass};
-        }
-        .bezel-icon-btn svg {
-          transition: stroke 0.15s ease, color 0.15s ease;
-        }
-        .bezel-icon-btn:hover svg {
-          stroke: ${COLORS.brassDark};
-          color: ${COLORS.brassDark};
-        }
-        .bezel-search-input::placeholder {
-          color: ${COLORS.muted};
-        }
-        .bezel-mobile-link {
-          border-top: 1px solid ${COLORS.hairline};
-        }
-      `}</style>
+    <div className="fixed top-0 left-0 z-50 w-full bg-[#F7F3EB] text-[#14181A]">
+      <header className="flex w-full items-center justify-between gap-6 border-b border-[#DCD5C5] px-6 py-4 md:px-10">
 
-      <header
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          gap: 24,
-          padding: "16px 40px",
-          borderBottom: `1px solid ${COLORS.hairline}`,
-        }}
-      >
         {/* Brand */}
         <a
           href="#"
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 10,
-            textDecoration: "none",
-            color: COLORS.ink,
-            flexShrink: 0,
-          }}
+          className="flex shrink-0 items-center gap-2.5 text-[#14181A] no-underline"
         >
-          <span
-            style={{
-              width: 26,
-              height: 26,
-              borderRadius: "50%",
-              border: `1.5px solid ${COLORS.ink}`,
-              position: "relative",
-              flexShrink: 0,
-              display: "inline-block",
-            }}
-          >
+          {/* Watch logo */}
+          <span className="relative inline-block h-6,5 w-6.5 shrink-0 rounded-full border-[1.5px] border-[#14181A]">
+
+            {/* Crown */}
+            <span className="absolute right-1 top-1/2 h-1.3 w-0,75 -translate-y-1/2 rounded-[1px] bg-[#14181A]" />
+
+            {/* Watch hand */}
             <span
+              className="absolute left-1/2 top-1/2 h-2,5 w-[1.5px] origin-bottom -translate-x-1/2 -translate-y-full rotate-0 bg-[#A9803F]"
               style={{
-                position: "absolute",
-                top: "50%",
-                right: -4,
-                width: 3,
-                height: 6,
-                background: COLORS.ink,
-                borderRadius: 1,
-                transform: "translateY(-50%)",
+                animation: "bezel-sweep 8s steps(8) infinite",
               }}
             />
-            <span
-              className="bezel-hand"
-              style={{
-                position: "absolute",
-                left: "50%",
-                top: "50%",
-                width: 1.5,
-                height: 9,
-                background: COLORS.brass,
-                transformOrigin: "50% 100%",
-                transform: "translate(-50%, -100%) rotate(0deg)",
-              }}
-            />
-            <span
-              style={{
-                position: "absolute",
-                left: "50%",
-                top: "50%",
-                width: 3,
-                height: 3,
-                borderRadius: "50%",
-                background: COLORS.ink,
-                transform: "translate(-50%, -50%)",
-              }}
-            />
+
+            {/* Center */}
+            <span className="absolute left-1/2 top-1/2 h-0,75 w-0,75 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#14181A]" />
           </span>
-          <span
-            style={{
-              fontFamily: "Georgia, 'Times New Roman', serif",
-              fontSize: 21,
-              fontWeight: 500,
-              letterSpacing: "-0.01em",
-            }}
-          >
+
+          <span className="font-serif text-[21px] font-medium tracking-[-0.01em]">
             Bezel
           </span>
         </a>
 
-        {/* Center nav links (desktop) */}
+        {/* Desktop navigation */}
         <nav
           aria-label="Primary"
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 32,
-            margin: "0 auto",
-          }}
-          className="bezel-nav-links"
+          className="mx-auto hidden items-center gap-8 min-[861px]:flex"
         >
           {NAV_LINKS.map((label) => (
             <a
               key={label}
               href="#"
-              className="bezel-link"
-              style={{
-                color: COLORS.ink,
-                textDecoration: "none",
-                fontSize: 14.5,
-                fontWeight: 500,
-                padding: "6px 0",
-                whiteSpace: "nowrap",
-              }}
+              className="border-b uppercase border-transparent py-1.5 text-[14.5px] font-medium text-[#14181A] no-underline transition-colors duration-150 hover:border-[#A9803F]"
             >
               {label}
             </a>
           ))}
         </nav>
 
-        {/* Right cluster */}
-        <div style={{ display: "flex", alignItems: "center", gap: 20, flexShrink: 0 }}>
-          <div style={{ display: "flex", alignItems: "center" }}>
+        {/* Right section */}
+        <div className="flex shrink-0 items-center gap-3 md:gap-5">
+
+          {/* Search */}
+          <div className="flex items-center">
             <input
-              className="bezel-search-input"
               type="text"
               placeholder="Search watches"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              style={{
-                width: searchOpen ? 160 : 0,
-                opacity: searchOpen ? 1 : 0,
-                marginRight: searchOpen ? 8 : 0,
-                padding: "8px 0",
-                border: "none",
-                borderBottom: `1px solid ${COLORS.hairline}`,
-                background: "transparent",
-                fontFamily: "Inter, sans-serif",
-                fontSize: 14,
-                color: COLORS.ink,
-                outline: "none",
-                transition: "width 0.2s ease, opacity 0.2s ease, margin-right 0.2s ease",
-              }}
+              className={`border-0 border-b border-[#DCD5C5] bg-transparent py-2 text-sm text-[#14181A] outline-none transition-all duration-200 placeholder:text-[#7C7A72] ${
+                searchOpen
+                  ? "mr-2 w-40 opacity-100"
+                  : "mr-0 w-0 opacity-0"
+              }`}
             />
+
             <button
-              className="bezel-icon-btn"
+              type="button"
               aria-label="Search"
               aria-expanded={searchOpen}
               onClick={() => {
                 setSearchOpen((v) => !v);
-                if (searchOpen) setQuery("");
+
+                if (searchOpen) {
+                  setQuery("");
+                }
               }}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                width: 34,
-                height: 34,
-                border: "none",
-                background: "none",
-                padding: 0,
-                cursor: "pointer",
-              }}
+              className="group flex h-8,5 w-8,5 cursor-pointer items-center justify-center border-0 bg-transparent p-0"
             >
-              <Search size={19} strokeWidth={1.5} color={COLORS.ink} />
+              <Search
+                size={19}
+                strokeWidth={1.5}
+                className="text-[#14181A] transition-colors duration-150 group-hover:text-[#7C5D2C]"
+              />
             </button>
           </div>
 
+          {/* User */}
           <a
             href="#"
-            className="bezel-icon-btn"
             aria-label="Log in"
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              width: 34,
-              height: 34,
-              textDecoration: "none",
-            }}
+            className="group flex h-8,5 w-8,5 items-center justify-center no-underline"
           >
-            <User size={19} strokeWidth={1.5} color={COLORS.ink} />
+            <User
+              size={19}
+              strokeWidth={1.5}
+              className="text-[#14181A] transition-colors duration-150 group-hover:text-[#7C5D2C]"
+            />
           </a>
 
+          {/* Cart */}
           <a
             href="#"
-            className="bezel-icon-btn"
             aria-label={`Cart, ${cartCount} items`}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              width: 34,
-              height: 34,
-              position: "relative",
-              textDecoration: "none",
-            }}
+            className="group relative flex h-8,5 w-8,5 items-center justify-center no-underline"
           >
-            <ShoppingBag size={19} strokeWidth={1.5} color={COLORS.ink} />
+            <ShoppingBag
+              size={19}
+              strokeWidth={1.5}
+              className="text-[#14181A] transition-colors duration-150 group-hover:text-[#7C5D2C]"
+            />
+
             {cartCount > 0 && (
-              <span
-                style={{
-                  position: "absolute",
-                  top: 2,
-                  right: 2,
-                  width: 14,
-                  height: 14,
-                  borderRadius: "50%",
-                  background: COLORS.brass,
-                  color: COLORS.ivory,
-                  fontSize: 9,
-                  fontWeight: 600,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
+              <span className="absolute right-0.5 top-0.5 flex h-3,5 w-3,5 items-center justify-center rounded-full bg-[#A9803F] text-[9px] font-semibold text-[#F7F3EB]">
                 {cartCount}
               </span>
             )}
           </a>
 
-          {/* Mobile menu toggle */}
+          {/* Mobile menu button */}
           <button
+            type="button"
             aria-label="Toggle menu"
             aria-expanded={menuOpen}
             onClick={() => setMenuOpen((v) => !v)}
-            className="bezel-menu-toggle"
-            style={{
-              display: "none",
-              alignItems: "center",
-              justifyContent: "center",
-              width: 34,
-              height: 34,
-              border: "none",
-              background: "none",
-              padding: 0,
-              cursor: "pointer",
-            }}
+            className="flex h-8,5 w-8,5 cursor-pointer items-center justify-center border-0 bg-transparent p-0 min-[861px]:hidden"
           >
             {menuOpen ? (
-              <X size={20} strokeWidth={1.5} color={COLORS.ink} />
+              <X
+                size={20}
+                strokeWidth={1.5}
+                className="text-[#14181A]"
+              />
             ) : (
-              <Menu size={20} strokeWidth={1.5} color={COLORS.ink} />
+              <Menu
+                size={20}
+                strokeWidth={1.5}
+                className="text-[#14181A]"
+              />
             )}
           </button>
         </div>
       </header>
 
-      {/* Mobile panel */}
+      {/* Mobile menu */}
       {menuOpen && (
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            borderBottom: `1px solid ${COLORS.hairline}`,
-          }}
-          className="bezel-mobile-panel"
-        >
+        <div className="flex flex-col border-b border-[#DCD5C5] bg-[#F7F3EB] min-[861px]:hidden">
           {NAV_LINKS.map((label) => (
             <a
               key={label}
               href="#"
-              className="bezel-mobile-link"
-              style={{
-                color: COLORS.ink,
-                textDecoration: "none",
-                fontSize: 15,
-                fontWeight: 500,
-                padding: "16px 40px",
-              }}
+              className="border-t border-[#DCD5C5] px-6 py-4 text-[15px] font-medium text-[#14181A] no-underline transition-colors hover:bg-[#eee9df] md:px-10"
+              onClick={() => setMenuOpen(false)}
             >
               {label}
             </a>
@@ -321,10 +170,12 @@ export default function Navbar() {
         </div>
       )}
 
+      {/* Animation */}
       <style>{`
-        @media (max-width: 860px) {
-          .bezel-nav-links { display: none !important; }
-          .bezel-menu-toggle { display: flex !important; }
+        @keyframes bezel-sweep {
+          to {
+            transform: translate(-50%, -100%) rotate(360deg);
+          }
         }
       `}</style>
     </div>

@@ -1,8 +1,12 @@
 import React from 'react'
+import Herosection from '../components/Home/Herosection'
 
 function Homepage() {
   return (
-    <div>Homepage</div>
+    <div className='w-full m-auto relative mt-15'>
+      <Herosection/>
+      
+    </div>
   )
 }
 

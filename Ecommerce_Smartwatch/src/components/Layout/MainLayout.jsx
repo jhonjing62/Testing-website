@@ -6,7 +6,7 @@ import Footer from "./Footer";
 
 function MainLayout() {
     return (
-        <div className="min-h-screen bg-amber-950">
+        <div className="min-h-screen mx-auto">
             <Navbar />
 
             <main>
