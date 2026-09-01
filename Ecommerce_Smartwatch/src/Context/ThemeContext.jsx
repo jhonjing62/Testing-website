@@ -3,7 +3,7 @@ import { createContext, useEffect, useState, useContext } from "react";
 
 const ThemeContext = createContext(null);
 
-export function ThemeProvide ({children}){
+export function ThemeProvider ({ children }){
     const [theme, setTheme]  = useState(()=>{
         const saveTheme = localStorage.getItem("theme");
         
@@ -21,9 +21,11 @@ export function ThemeProvide ({children}){
 
     const value = {theme, setTheme, toggleTheme};
 
-    <ThemeContext.Provider value={value}>
-        {children}
-    </ThemeContext.Provider>
+    return (
+       <ThemeContext.Provider value={value}>
+                {children}
+          </ThemeContext.Provider>     
+    );
 
 }
 
