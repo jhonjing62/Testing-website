@@ -11,6 +11,7 @@ function MainLayout() {
 
             <main>
                 <Outlet />
+                <Footer />
             </main>
 
             <Footer />
