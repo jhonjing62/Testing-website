@@ -1,443 +1,218 @@
+
 import React, { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { FaStar, FaArrowLeft } from "react-icons/fa";
-import ProductData from "../../Data/ProductData";
-import { useProduct } from "../../Context/ContextProducts";
+import { useParams, useNavigate } from "react-router-dom";
+
+import  ProductData  from "../../Data/ProductData";
 
 function ProductDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const { addToCart } = useProduct();
+  // Quantity
+  const [count, setCount] = useState(1);
+
+  // Selected product image
+  const [selectedImage, setSelectedImage] = useState(0);
 
   // Find product
   const product = ProductData.find(
     (item) => item.id === Number(id)
   );
 
-  // Selected image
-  const [selectedImage, setSelectedImage] = useState(0);
-
-  // Selected color
-  const [selectedColor, setSelectedColor] = useState(
-    product?.colors?.[0] || ""
-  );
-
-  // Quantity
-  const [quantity, setQuantity] = useState(1);
-
   // Product not found
   if (!product) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center">
-        <h1 className="text-2xl font-bold mb-4">
+      <div className="flex min-h-screen flex-col items-center justify-center">
+        <h2 className="text-xl font-extrabold">
           Product Not Found
-        </h1>
+        </h2>
 
         <button
-          onClick={() => navigate("/shop")}
-          className="bg-black text-white px-5 py-2 rounded-md"
+          onClick={() => navigate("/")}
+          className="mt-4 rounded-lg bg-black px-5 py-2 text-white"
         >
-          Back to Shop
+          Back to Home
         </button>
       </div>
     );
   }
 
-  // Add to cart
-  const handleAddToCart = () => {
-    const cartProduct = {
-      ...product,
-      selectedColor,
-      quantity,
-    };
+  // Related products
+  const relatedProducts = ProductData
+    .filter(
+      (item) =>
+        item.category === product.category &&
+        item.id !== product.id
+    )
+    .slice(0, 4);
 
-    addToCart(cartProduct);
+  // Increase quantity
+  const increase = () => {
+    setCount((prev) => prev + 1);
+  };
 
-    navigate("/cart");
+  // Decrease quantity
+  const decrease = () => {
+    setCount((prev) => Math.max(1, prev - 1));
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen bg-white text-[#171717]">
 
-      {/* Container */}
-      <div className="max-w-7xl mx-auto px-4">
+      <div className="mx-auto max-w-7xl px-4 py-10">
 
-        {/* Back Button */}
-        <button
-          onClick={() => navigate(-1)}
-          className="
-            flex
-            items-center
-            gap-2
-            mb-6
-            text-gray-600
-            hover:text-black
-          "
-        >
-          <FaArrowLeft />
-          Back
-        </button>
+        {/* ================= PRODUCT ================= */}
+        <div className="grid gap-10 lg:grid-cols-2">
 
-        {/* Product Main */}
-        <div className="
-          bg-white
-          rounded-xl
-          shadow-lg
-          p-6
-          grid
-          grid-cols-1
-          md:grid-cols-2
-          gap-10
-        ">
+          {/* ================= IMAGES ================= */}
+          <div className="flex gap-5">
 
-          {/* ================= IMAGE SECTION ================= */}
-          <div>
+            {/* Thumbnails */}
+            <div className="flex w-[120px] flex-col gap-3">
 
-            {/* Main Image */}
-            <div className="
-              w-full
-              aspect-square
-              overflow-hidden
-              rounded-lg
-              bg-gray-100
-            ">
-              <img
-                src={product.imgs?.[selectedImage]}
-                alt={product.name}
-                className="
-                  w-full
-                  h-full
-                  object-cover
-                "
-              />
-            </div>
-
-            {/* Thumbnail Images */}
-            <div className="
-              flex
-              gap-3
-              mt-4
-              overflow-x-auto
-            ">
-              {product.imgs?.map((img, index) => (
+              {product.imgs?.map((image, index) => (
                 <button
-                  key={index}
+                  key={image}
+                  type="button"
                   onClick={() => setSelectedImage(index)}
-                  className={`
-                    w-20
-                    h-20
-                    rounded-md
-                    overflow-hidden
-                    border-2
-                    ${
-                      selectedImage === index
-                        ? "border-black"
-                        : "border-gray-200"
-                    }
-                  `}
+                  className={`h-[120px] w-[120px] overflow-hidden rounded-lg border-2 ${
+                    selectedImage === index
+                      ? "border-black"
+                      : "border-gray-200"
+                  }`}
                 >
                   <img
-                    src={img}
+                    src={image}
                     alt={`${product.name} ${index + 1}`}
-                    className="
-                      w-full
-                      h-full
-                      object-cover
-                    "
+                    className="h-full w-full object-contain"
                   />
                 </button>
               ))}
+
             </div>
+
+            {/* Main Image */}
+            <div className="flex flex-1 items-center justify-center overflow-hidden rounded-xl bg-gray-100">
+
+              {product.imgs?.length > 0 ? (
+                <img
+                  src={product.imgs[selectedImage]}
+                  alt={product.name}
+                  className="h-[600px] w-full object-contain p-8"
+                />
+              ) : (
+                <p className="text-gray-500">
+                  No image available
+                </p>
+              )}
+
+            </div>
+
           </div>
 
           {/* ================= PRODUCT INFO ================= */}
-          <div>
+          <div className="px-5">
 
             {/* Category */}
-            <p className="text-sm text-gray-500 uppercase">
+            <p className="text-xl text-gray-500">
               {product.category}
             </p>
 
             {/* Name */}
-            <h1 className="
-              text-3xl
-              md:text-4xl
-              font-bold
-              mt-2
-            ">
+            <h1 className="mt-2 text-3xl font-bold">
               {product.name}
             </h1>
 
-            {/* Brand */}
-            <p className="text-gray-500 mt-2">
-              Brand:{" "}
-              <span className="font-semibold text-black">
-                {product.brand}
-              </span>
-            </p>
-
-            {/* Rating */}
-            <div className="flex items-center gap-2 mt-4">
-
-              <div className="flex gap-1">
-                {[...Array(5)].map((_, index) => (
-                  <FaStar
-                    key={index}
-                    className={
-                      product.rating > index
-                        ? "text-yellow-400"
-                        : "text-gray-300"
-                    }
-                  />
-                ))}
-              </div>
-
-              <span className="text-gray-500">
-                {product.rating} ({product.reviews} reviews)
-              </span>
-            </div>
-
             {/* Price */}
-            <div className="flex items-center gap-3 mt-5">
-
-              <span className="
-                text-3xl
-                font-bold
-              ">
-                ${product.price}
-              </span>
-
-              {product.originalprice && (
-                <span className="
-                  text-lg
-                  text-gray-400
-                  line-through
-                ">
-                  ${product.originalprice}
-                </span>
-              )}
-
-              {product.discount && (
-                <span className="
-                  bg-red-500
-                  text-white
-                  px-2
-                  py-1
-                  rounded
-                  text-sm
-                ">
-                  -{product.discount}%
-                </span>
-              )}
-            </div>
-
-            {/* Description */}
-            <p className="
-              text-gray-600
-              leading-7
-              mt-5
-            ">
-              {product.description}
+            <p className="mt-4 text-xl font-bold">
+              ${product.price}
             </p>
 
-            {/* ================= COLORS ================= */}
-            {product.colors?.length > 0 && (
-              <div className="mt-6">
+            {/* Quantity */}
+            <div className="mt-6 flex w-fit items-center overflow-hidden rounded-xl border shadow-sm">
 
-                <h3 className="font-semibold mb-3">
-                  Color:
-                  <span className="font-normal ml-2">
-                    {selectedColor}
-                  </span>
-                </h3>
+              <button
+                type="button"
+                onClick={decrease}
+                className="bg-gray-200 px-4 py-2 text-2xl font-bold hover:bg-gray-300"
+              >
+                -
+              </button>
 
-                <div className="flex flex-wrap gap-2">
-                  {product.colors.map((color) => (
-                    <button
-                      key={color}
-                      onClick={() => setSelectedColor(color)}
-                      className={`
-                        px-4
-                        py-2
-                        rounded-md
-                        border
-                        transition
-                        ${
-                          selectedColor === color
-                            ? "bg-black text-white border-black"
-                            : "bg-white text-black border-gray-300"
-                        }
-                      `}
-                    >
-                      {color}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
+              <p className="min-w-[60px] text-center text-lg font-semibold">
+                {count}
+              </p>
 
-            {/* ================= QUANTITY ================= */}
-            <div className="mt-6">
+              <button
+                type="button"
+                onClick={increase}
+                className="bg-gray-200 px-4 py-2 text-2xl font-bold hover:bg-gray-300"
+              >
+                +
+              </button>
 
-              <h3 className="font-semibold mb-3">
-                Quantity
-              </h3>
-
-              <div className="
-                flex
-                items-center
-                border
-                border-gray-300
-                rounded-md
-                w-fit
-              ">
-
-                <button
-                  onClick={() =>
-                    setQuantity((prev) =>
-                      Math.max(1, prev - 1)
-                    )
-                  }
-                  className="
-                    px-4
-                    py-2
-                    text-xl
-                  "
-                >
-                  -
-                </button>
-
-                <span className="
-                  px-5
-                  py-2
-                  border-x
-                ">
-                  {quantity}
-                </span>
-
-                <button
-                  onClick={() =>
-                    setQuantity((prev) =>
-                      Math.min(product.stock, prev + 1)
-                    )
-                  }
-                  className="
-                    px-4
-                    py-2
-                    text-xl
-                  "
-                >
-                  +
-                </button>
-
-              </div>
             </div>
 
-            {/* Stock */}
-            <p className="mt-4 text-sm text-gray-500">
-              {product.stock > 0
-                ? `${product.stock} items available`
-                : "Out of stock"}
-            </p>
-
-            {/* ================= ADD TO CART ================= */}
+            {/* Add To Cart */}
             <button
-              onClick={handleAddToCart}
-              disabled={product.stock <= 0}
-              className="
-                w-full
-                mt-6
-                bg-black
-                text-white
-                py-4
-                rounded-lg
-                font-semibold
-                text-lg
-                hover:bg-gray-800
-                transition
-                disabled:bg-gray-400
-                disabled:cursor-not-allowed
-              "
+              type="button"
+              className="mt-6 rounded-lg bg-black px-8 py-3 font-bold text-white transition hover:bg-gray-800"
             >
-              {product.stock > 0
-                ? "Add to Cart"
-                : "Out of Stock"}
+              Add To Cart
             </button>
 
-            {/* Buy Now */}
+            {/* Back Home */}
             <button
-              onClick={handleAddToCart}
-              disabled={product.stock <= 0}
-              className="
-                w-full
-                mt-3
-                border
-                border-black
-                text-black
-                py-4
-                rounded-lg
-                font-semibold
-                hover:bg-black
-                hover:text-white
-                transition
-              "
+              type="button"
+              onClick={() => navigate("/")}
+              className="ml-3 mt-6 rounded-lg border border-black px-6 py-3 font-semibold transition hover:bg-black hover:text-white"
             >
-              Buy Now
+              Back to Home
             </button>
+
           </div>
         </div>
 
-        {/* ================= SPECIFICATION ================= */}
-        <div className="
-          bg-white
-          rounded-xl
-          shadow-lg
-          p-6
-          mt-8
-        ">
+        {/* ================= RELATED PRODUCTS ================= */}
+        <div className="mt-16">
 
-          <h2 className="
-            text-2xl
-            font-bold
-            mb-5
-          ">
-            Specifications
+          <h2 className="mb-6 text-2xl font-bold">
+            Related Products
           </h2>
 
-          <div className="
-            grid
-            grid-cols-1
-            md:grid-cols-2
-            gap-4
-          ">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
 
-            {Object.entries(product.specification || {}).map(
-              ([key, value]) => (
-                <div
-                  key={key}
-                  className="
-                    flex
-                    justify-between
-                    border-b
-                    py-3
-                  "
-                >
-                  <span className="
-                    font-semibold
-                    capitalize
-                  ">
-                    {key}
-                  </span>
+            {relatedProducts.map((item) => (
+              <div
+                key={item.id}
+                onClick={() => navigate(`/product/${item.id}`)}
+                className="cursor-pointer rounded-xl border p-4 transition hover:shadow-lg"
+              >
 
-                  <span className="text-gray-600">
-                    {value}
-                  </span>
+                {/* Image */}
+                <div className="h-48 w-full overflow-hidden">
+                  <img
+                    src={item.imgs?.[0] || ""}
+                    alt={item.name}
+                    className="h-full w-full object-contain"
+                  />
                 </div>
-              )
-            )}
+
+                {/* Name */}
+                <h3 className="mt-3 font-semibold">
+                  {item.name}
+                </h3>
+
+                {/* Price */}
+                <p className="mt-2 font-bold">
+                  ${item.price}
+                </p>
+
+              </div>
+            ))}
 
           </div>
+
         </div>
 
       </div>
@@ -446,3 +221,4 @@ function ProductDetail() {
 }
 
 export default ProductDetail;
+

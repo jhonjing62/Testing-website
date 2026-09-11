@@ -45,7 +45,7 @@ export default function Footer() {
 
       {/* Newsletter */}
       <div className="bg-neutral-900 text-white px-6 md:px-12 py-5 flex flex-wrap items-center justify-between gap-6">
-        <div className="flex items-center gap-4 min-w-[240px]">
+        <div className="flex items-center gap-4 min-w-60">
           <span className="w-9 h-9 rounded-full border border-white/30 flex items-center justify-center shrink-0">
             <Mail size={16} />
           </span>
@@ -63,7 +63,7 @@ export default function Footer() {
 
         <form
           onSubmit={(e) => e.preventDefault()}
-          className="flex flex-1 max-w-[620px] min-w-[260px]"
+          className="flex flex-1 max-w-155 min-w-65"
         >
           <input
             type="email"
@@ -93,7 +93,7 @@ export default function Footer() {
             WATCHES
           </span>
 
-          <p className="text-[13px] text-neutral-500 leading-relaxed mt-4 max-w-[220px]">
+          <p className="text-[13px] text-neutral-500 leading-relaxed mt-4 max-w-55">
             Timeless design. Trusted performance. Crafted to be with you,
             always.
           </p>
