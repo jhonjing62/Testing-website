@@ -14,8 +14,8 @@ function ProductCard({ data}) {
     <div  className=' overflow-hidden my-4 rounded-lg group transition-all duration-400 relative flex flex-col shadow-xl shadow-gray-400
                       hover:scale-105 hover:-translate-y-2 hover:shadow-sm hover:shadow-gray-500
     '>
-        <div className=' aspect-square overflow-hidden relative '>
-            <img onClick={()=>navigate("/products/:id")} src={data.imgs[0] || ""} 
+        <div  className=' aspect-square overflow-hidden relative '>
+            <img  onClick={()=>navigate(`/products/${data.id}`)} src={data.imgs[0] || ""} 
             alt={data.name} 
             className='w-full h-full object-cover cursor-pointer 
             transition duration-300 

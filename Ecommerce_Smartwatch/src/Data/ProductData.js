@@ -115,7 +115,7 @@
     name: "Apple Watch Ultra 2",
     brand: "ROLEX",
     category: "watch",
-    price: 749,
+    price: 24000,
     originalprice: 799,
     discount: 6,
     rating: 4,
@@ -124,8 +124,8 @@
 
     imgs: [
       "https://i.pinimg.com/1200x/e8/ef/e1/e8efe19bcd58444c61db42f1afb863f3.jpg",
-      "https://images.unsplash.com/photo-1544117519-31a4b719223d",
-      "https://images.unsplash.com/photo-1551816230-ef5deaed4a26"
+      "https://i.pinimg.com/736x/0e/8d/11/0e8d118a6fdf7dbcfd4ebccdf344eb33.jpg",
+      "https://i.pinimg.com/1200x/1e/9f/6f/1e9f6f07a040d59ecfa933fb509977b1.jpg"
     ],
 
     description:
@@ -186,10 +186,10 @@
 
   {
     id: 6,
-    name: "Casio G-Shock GA-2100",
+    name: "Day Date 40 yellow gold",
     brand: "ROLEX",
     category: "Watch",
-    price: 99,
+    price: 12000,
     originalprice: 120,
     discount: 18,
     rating: 4.7,
@@ -198,8 +198,8 @@
 
     imgs: [
       "https://i.pinimg.com/1200x/13/6c/8c/136c8c73428ef6f47af4c1b983165827.jpg",
-      "https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3",
-      "https://images.unsplash.com/photo-1508057198894-247b23fe5ade"
+      "https://i.pinimg.com/1200x/25/e3/87/25e3876ccf06d8781d1451193b66ab36.jpg",
+      "https://i.pinimg.com/1200x/db/38/9b/db389b5b911c66872348f8972b1c23c0.jpg"
     ],
 
     description:
@@ -223,7 +223,7 @@
 
   {
     id: 7,
-    name: "Seiko 5 Sports",
+    name: "Cosmograph Daytona in Oyster, M126508.0008",
     brand: "ROLEX",
     category: "Watch",
     price: 295,
@@ -235,8 +235,8 @@
 
     imgs: [
       "https://i.pinimg.com/1200x/01/8e/a3/018ea3d9833d2cea70d93b0f5d348c1e.jpg",
-      "https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3",
-      "https://images.unsplash.com/photo-1523170335258-f5ed11844a49"
+      "https://i.pinimg.com/1200x/a3/86/e5/a386e5df93ee0f6808dbdf5b74d1cd9f.jpg",
+      "https://i.pinimg.com/1200x/d7/38/a3/d738a37a47b69e32226fad940962252e.jpg"
     ],
 
     description:
