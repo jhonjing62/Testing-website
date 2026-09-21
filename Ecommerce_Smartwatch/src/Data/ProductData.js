@@ -187,7 +187,7 @@
   {
     id: 6,
     name: "Day Date 40 yellow gold",
-    brand: "ROLEX",
+    brand: "ROLEX 1",
     category: "Watch",
     price: 12000,
     originalprice: 120,
@@ -197,9 +197,9 @@
     stock: 45,
 
     imgs: [
-      "https://i.pinimg.com/1200x/13/6c/8c/136c8c73428ef6f47af4c1b983165827.jpg",
+      "https://i.pinimg.com/1200x/db/38/9b/db389b5b911c66872348f8972b1c23c0.jpg",
       "https://i.pinimg.com/1200x/25/e3/87/25e3876ccf06d8781d1451193b66ab36.jpg",
-      "https://i.pinimg.com/1200x/db/38/9b/db389b5b911c66872348f8972b1c23c0.jpg"
+      "https://i.pinimg.com/1200x/13/6c/8c/136c8c73428ef6f47af4c1b983165827.jpg",
     ],
 
     description:
@@ -216,14 +216,14 @@
 
     colors: ["Black", "Black/Red", "White"],
     featured: false,
-    flashsale: true,
-    bestseller: true,
+    flashsale: false,
+    bestseller: false,
     newarrival: false
   },
 
   {
     id: 7,
-    name: "Cosmograph Daytona in Oyster, M126508.0008",
+    name: "Cosmograph Daytona",
     brand: "ROLEX",
     category: "Watch",
     price: 295,
@@ -253,7 +253,7 @@
 
     colors: ["Black", "Blue", "Green"],
     featured: false,
-    flashsale: false,
+    flashsale: true,
     bestseller: true,
     newarrival: false
   },
@@ -262,7 +262,7 @@
     id: 8,
     name: "Rolex Submariner",
     brand: "ROLEX",
-    category: "Luxury Watch",
+    category: "Watch",
     price: 12500,
     originalprice: 13500,
     discount: 7,
@@ -290,7 +290,7 @@
 
     colors: ["Black", "Steel", "Blue"],
     featured: true,
-    flashsale: false,
+    flashsale: true,
     bestseller: true,
     newarrival: false
   },
@@ -327,7 +327,7 @@
 
     colors: ["Black", "Silver", "Rose Gold"],
     featured: false,
-    flashsale: true,
+    flashsale: false,
     bestseller: false,
     newarrival: false
   },
@@ -364,7 +364,7 @@
 
     colors: ["Blue", "Black", "Green"],
     featured: true,
-    flashsale: false,
+    flashsale: true,
     bestseller: true,
     newarrival: true
   }

@@ -34,7 +34,7 @@ function ProductCard({ data}) {
           <h1 className='uppercase font-bold font-serif'>{data.brand} & {data.category}</h1>
           <div className='flex gap-1'>
              <p className='font-serif font-bold '>${data.price}</p>
-             <p className='font-medium'>({data.rating})</p>
+           
           </div>
              {/* Rating */}
               <div className="flex items-center mt-1 gap-1">
@@ -48,8 +48,9 @@ function ProductCard({ data}) {
                     }
                   />
                 ))}
+                  <p className='font-medium'>({data.rating})</p>
               </div>
-              <button onClick={()=>navigate("/")} className='rounded-lg shadow-lg
+              <button onClick={()=>navigate("/cart")} className='rounded-lg shadow-lg
                mt-2 bg-black text-white font-bold px-4 py-2'>
                     Add To Card 
                 </button>

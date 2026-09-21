@@ -1,6 +1,8 @@
 
 import { useState } from "react";
 import { Search, User, ShoppingBag, Menu, X } from "lucide-react";
+import { useCart } from "../../Context/ContextCarts";
+import { useNavigate } from "react-router-dom";
 
 const NAV_LINKS = ["New arrivals", "Men", "Women", "Collection"];
 
@@ -8,11 +10,12 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [query, setQuery] = useState("");
-
+  const {carts, totalItem,totalPrice} = useCart();
+  const navigate = useNavigate();
   const cartCount = 2;
 
   return (
-    <div className="fixed top-0 left-0 z-50 w-full bg-[#F7F3EB] text-[#14181A]">
+    <div className="fixed top-0 left-0 z-50  w-full bg-[#F7F3EB] text-[#14181A]">
       <header className="flex w-full items-center justify-between gap-6 border-b border-[#DCD5C5] px-6 py-4 md:px-10">
 
         {/* Brand */}
@@ -113,18 +116,19 @@ export default function Navbar() {
           {/* Cart */}
           <a
             href="#"
-            aria-label={`Cart, ${cartCount} items`}
+            onClick={()=>navigate("/cart")}
+            aria-label={`Cart, ${totalItem} items`}
             className="group relative flex h-8,5 w-8,5 items-center justify-center no-underline"
           >
             <ShoppingBag
               size={19}
               strokeWidth={1.5}
-              className="text-[#14181A] transition-colors duration-150 group-hover:text-[#7C5D2C]"
+              className="text-[#14181A] relative transition-colors duration-150 group-hover:text-[#7C5D2C]"
             />
 
-            {cartCount > 0 && (
-              <span className="absolute right-0.5 top-0.5 flex h-3,5 w-3,5 items-center justify-center rounded-full bg-[#A9803F] text-[9px] font-semibold text-[#F7F3EB]">
-                {cartCount}
+            {totalItem > 0 && (
+              <span className="absolute overflow-hidden -right-3 -top-1 flex h-4 w-4 p-2 items-center justify-center rounded-full bg-[#A9803F] text-[9px] font-semibold text-[#F7F3EB]">
+                {totalItem}
               </span>
             )}
           </a>
